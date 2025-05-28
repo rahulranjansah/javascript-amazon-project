@@ -28,6 +28,9 @@
 //     priceCents: 799
 // }];
 
+// loading the data
+// in html scripts we load the products then we call it here with name as products
+
 // generating the HTML
 let productsHTML = '';
 
