@@ -81,7 +81,7 @@ products.forEach((product) =>
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart-button" data-product-id="${product.id}">
             Add to Cart
           </button>
         </div>
@@ -93,3 +93,51 @@ products.forEach((product) =>
 // adding the HTML tag and gluing it together
 
 document.querySelector('.js-product-grid').innerHTML = productsHTML;
+
+
+// problem solved which element do we have to add using data-product-name?
+
+document.querySelectorAll('.js-add-to-cart-button').forEach((button) =>
+  {
+    button.addEventListener('click', () =>
+    {
+      // console.log('Added button')
+      // console.log(button.dataset.productName);
+      const productId = button.dataset.productId;
+
+      let matchingItem;
+
+      cart.forEach(
+        (item) => {
+          if (productId === item.productId)
+          {
+            matchingItem = item;
+          }
+        });
+
+        if (matchingItem)
+        {
+          matchingItem.quantity += 1
+        }
+
+        else
+        {
+          cart.push ({
+            productId: productId,
+            quantity: 1
+          });
+        };
+
+        let cartQuantity = 0;
+        cart.forEach((item) =>
+        {
+          cartQuantity += item.quantity;
+        });
+
+      // implementing cartQuantity with JS and DOM
+      document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
+
+      console.log(cartQuantity);
+      console.log(cart);
+    });
+  });
