@@ -32,6 +32,11 @@
 // in html scripts we load the products then we call it here with name as products
 
 // generating the HTML
+
+// way to fight the naming conflicts
+import {cart} from '../data/cart.js';
+import {products} from '../data/products.js';
+
 let productsHTML = '';
 
 products.forEach((product) =>
@@ -137,7 +142,7 @@ document.querySelectorAll('.js-add-to-cart-button').forEach((button) =>
       // implementing cartQuantity with JS and DOM
       document.querySelector('.js-cart-quantity').innerHTML = cartQuantity;
 
-      console.log(cartQuantity);
-      console.log(cart);
+      // console.log(cartQuantity);
+      // console.log(cart);
     });
   });
