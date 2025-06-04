@@ -1,9 +1,9 @@
 // named exports
 
 import {cart, removeFromCart, updateDeliveryOption} from '../../data/cart.js'
-import { products } from '../../data/products.js';
+import { getProduct, products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { deliveryOptions } from '../../data/deliveryOptions.js';
+import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOptions.js';
 
 // Default export
 
@@ -28,26 +28,20 @@ export function renderOrderSummary ()
 
         const productId = cartItem.productId;
 
-        let matchingProduct;
+        const matchingProduct = getProduct(productId)
 
-        products.forEach((product) =>
-        {
-            if (product.id === productId)
-            {
-                matchingProduct = product;
-            }
-        });
+        // products.forEach((product) =>
+        // {
+        //     if (product.id === productId)
+        //     {
+        //         matchingProduct = product;
+        //     }
+        // });
 
         // syncing radio delivery date with main review date
         const deliveryOptionId = cartItem.deliveryOptionId;
 
-        let deliveryOption;
-
-        deliveryOptions.forEach((option) => {
-            if (option.id === deliveryOptionId) {
-                deliveryOption = option;
-            }
-        });
+        const deliveryOption = getDeliveryOption(deliveryOptionId);
 
         const today = dayjs();
         const deliveryDate = today.add(
