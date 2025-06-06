@@ -1,7 +1,7 @@
 import {addToCart, cart, loadFromStorage } from '../../data/cart.js';
 import { deliveryOptions } from '../../data/deliveryOptions.js';
 
-
+// unit testing with mock and flaky test
 describe('test suit: addToCart', () => {
 
     it ('adds an exisiting product to the cart', () => {
