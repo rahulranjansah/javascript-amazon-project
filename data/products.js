@@ -15,6 +15,7 @@ export function getProduct(productId)
   return matchingProduct;
 }
 
+// creation of a product label
 class Product {
   id;
   image;
@@ -39,9 +40,55 @@ class Product {
   {
     return `${formatCurrency(this.priceCents)}`;
   }
+
+  extraInfoHTML() {
+    return '';
+  }
 }
 
+//  special modified label for clothes
+class Clothing extends Product {
+  sizeChartLink;
 
+  constructor(productDetails) {
+
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+
+  }
+
+  extraInfoHTML() {
+    // super.extraInfoHTML();
+    return `
+    <a href="${this.sizeChartLink}" target="_blank">
+    Size Chart
+    </a>
+    `;
+  }
+
+}
+
+// const tshirt = new Clothing(
+//   {
+//     id: "83d4ca15-0f35-48f5-b7a3-1ea210004f2e",
+//     image: "images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg",
+//     name: "Adults Plain Cotton T-Shirt - 2 Pack",
+//     rating: {
+//       stars: 4.5,
+//       count: 56
+//     },
+//     priceCents: 799,
+//     keywords: [
+//       "tshirts",
+//       "apparel",
+//       "mens"
+//     ],
+//     type: "clothing",
+//     sizeChartLink: "images/clothing-size-chart.png"
+//   }
+// );
+
+// console.log(tshirt);
 
 // mapping of all the new as an array with map
 // const product1 = new Product(
@@ -61,6 +108,7 @@ class Product {
 //     ]
 //   }
 // );
+
 
 export const products = [
   {
@@ -724,8 +772,14 @@ export const products = [
 ].map((productDetails) =>
   {
 
+  if (productDetails.type === 'clothing') {
+    return new Clothing(productDetails);
+  }
+
   return new Product(productDetails);
 
 });
 
 console.log(products);
+
+// Attach correct label to each product is done with mapper above
